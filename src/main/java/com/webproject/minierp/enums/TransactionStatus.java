@@ -1,5 +1,5 @@
 package com.webproject.minierp.enums;
 
-public enum TransactionsStatus {
+public enum TransactionStatus {
     PENDING, PROCESSING, COMPLETED, CANCELLED
 }
