@@ -6,10 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.print.attribute.standard.MediaSize;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(value = Exception.class)
     public ResponseEntity<Response> handleAllExceptions(Exception ex){
         Response response = Response.builder()
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
@@ -27,7 +29,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler(NameValueRequiredException.class)
     public ResponseEntity<Response> handleNameValueRequiredException(Exception ex){
         Response response = Response.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
@@ -36,7 +38,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler(InvalidCredentialsException.class)
     public ResponseEntity<Response> handleInvalidCredentialsException(Exception ex) {
         Response response = Response.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
